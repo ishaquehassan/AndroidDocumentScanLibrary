@@ -63,8 +63,6 @@ public class PickImageFragment extends Fragment {
         galleryButton.setOnClickListener(new GalleryClickListener());
         if (isIntentPreferenceSet()) {
             handleIntentPreference();
-        } else {
-            getActivity().finish();
         }
     }
 
