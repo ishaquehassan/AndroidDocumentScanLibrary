@@ -69,13 +69,13 @@ public class PickImageFragment extends Fragment {
     }
 
     private void clearTempImages() {
-        try {
+       /* try {
             File tempFolder = new File(ScanConstants.IMAGE_PATH);
             for (File f : tempFolder.listFiles())
                 f.delete();
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     private void handleIntentPreference() {
@@ -154,16 +154,16 @@ public class PickImageFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.d("", "onActivityResult" + resultCode);
-        Bitmap bitmap = null;
+        Uri bitmap = null;
         if (resultCode == Activity.RESULT_OK) {
             try {
                 switch (requestCode) {
                     case ScanConstants.START_CAMERA_REQUEST_CODE:
-                        bitmap = getBitmap(fileUri);
+                        bitmap = fileUri;
                         break;
 
                     case ScanConstants.PICKFILE_REQUEST_CODE:
-                        bitmap = getBitmap(data.getData());
+                        bitmap = data.getData();
                         break;
                 }
             } catch (Exception e) {
@@ -177,9 +177,9 @@ public class PickImageFragment extends Fragment {
         }
     }
 
-    protected void postImagePick(Bitmap bitmap) {
-        Uri uri = Utils.getUri(getActivity(), bitmap);
-        bitmap.recycle();
+    protected void postImagePick(Uri uri) {
+        //Uri uri = Utils.getUri(getActivity(), bitmap);
+        //bitmap.recycle();
         scanner.onBitmapSelect(uri);
     }
 
