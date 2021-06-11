@@ -55,43 +55,15 @@
             android:textColor="@android:color/white" />
     </LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <Button
         android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageButton
-            android:scaleType="centerInside"
-            android:id="@+id/btnRLeft"
-            android:src="@drawable/rotating_left"
-            android:layout_width="70dp"
-            android:background="@color/bottom_background_color"
-            android:padding="@dimen/bottom_bar_padding"
-            android:layout_marginRight="10dp"
-            android:layout_height="match_parent" />
-
-        <Button
-            android:id="@+id/doneButton"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:background="@color/bottom_background_color"
-            android:orientation="horizontal"
-            android:padding="@dimen/bottom_bar_padding"
-            android:text="@string/done" />
-
-        <ImageButton
-            android:scaleType="centerInside"
-            android:id="@+id/btnRRight"
-            android:src="@drawable/rotating_right"
-            android:layout_width="70dp"
-            android:background="@color/bottom_background_color"
-            android:padding="@dimen/bottom_bar_padding"
-            android:layout_marginLeft="10dp"
-            android:layout_height="match_parent" />
-
-    </LinearLayout>
+        android:id="@+id/doneButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bottom_background_color"
+        android:orientation="horizontal"
+        android:padding="@dimen/bottom_bar_padding"
+        android:text="@string/done" />
 
 
 

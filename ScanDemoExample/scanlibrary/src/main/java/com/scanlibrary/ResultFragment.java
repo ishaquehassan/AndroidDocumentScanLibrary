@@ -32,11 +32,8 @@ public class ResultFragment extends Fragment {
     private Button MagicColorButton;
     private Button grayModeButton;
     private Button bwButton;
-    private ImageButton rotateLeftButton;
-    private ImageButton rotateRightButton;
     private Bitmap transformed;
     private static ProgressDialogFragment progressDialogFragment;
-    float currentRotation = 0;
 
     public ResultFragment() {
     }
@@ -46,13 +43,6 @@ public class ResultFragment extends Fragment {
         view = inflater.inflate(R.layout.result_layout, null);
         init();
         return view;
-    }
-
-    public Bitmap RotateBitmap(Bitmap source, float angle)
-    {
-        Matrix matrix = new Matrix();
-        matrix.postRotate(angle);
-        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
     }
 
     private void init() {
@@ -68,27 +58,8 @@ public class ResultFragment extends Fragment {
         Bitmap bitmap = getBitmap();
         setScannedImage(bitmap);
         doneButton = (Button) view.findViewById(R.id.doneButton);
-        rotateLeftButton = (ImageButton) view.findViewById(R.id.btnRLeft);
-        rotateRightButton = (ImageButton) view.findViewById(R.id.btnRRight);
+
         doneButton.setOnClickListener(new DoneButtonClickListener());
-        rotateLeftButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(currentRotation == 360){
-                    currentRotation = -90;
-                }
-                setScannedImage(RotateBitmap(original,currentRotation+=90));
-            }
-        });
-        rotateRightButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(currentRotation == 360){
-                    currentRotation = -90;
-                }
-                setScannedImage(RotateBitmap(original,currentRotation-=90));
-            }
-        });
     }
 
     private Bitmap getBitmap() {
