@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -30,8 +32,11 @@ public class ResultFragment extends Fragment {
     private Button MagicColorButton;
     private Button grayModeButton;
     private Button bwButton;
+    private ImageButton rotateLeftButton;
+    private ImageButton rotateRightButton;
     private Bitmap transformed;
     private static ProgressDialogFragment progressDialogFragment;
+    float currentRotation = 0;
 
     public ResultFragment() {
     }
@@ -41,6 +46,13 @@ public class ResultFragment extends Fragment {
         view = inflater.inflate(R.layout.result_layout, null);
         init();
         return view;
+    }
+
+    public Bitmap RotateBitmap(Bitmap source, float angle)
+    {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
     }
 
     private void init() {
@@ -56,7 +68,27 @@ public class ResultFragment extends Fragment {
         Bitmap bitmap = getBitmap();
         setScannedImage(bitmap);
         doneButton = (Button) view.findViewById(R.id.doneButton);
+        rotateLeftButton = (ImageButton) view.findViewById(R.id.btnRLeft);
+        rotateRightButton = (ImageButton) view.findViewById(R.id.btnRRight);
         doneButton.setOnClickListener(new DoneButtonClickListener());
+        rotateLeftButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(currentRotation == 360){
+                    currentRotation = -90;
+                }
+                setScannedImage(RotateBitmap(original,currentRotation+=90));
+            }
+        });
+        rotateRightButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(currentRotation == 360){
+                    currentRotation = -90;
+                }
+                setScannedImage(RotateBitmap(original,currentRotation-=90));
+            }
+        });
     }
 
     private Bitmap getBitmap() {
