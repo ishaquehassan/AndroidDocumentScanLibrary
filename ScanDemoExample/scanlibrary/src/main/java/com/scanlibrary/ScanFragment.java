@@ -63,7 +63,7 @@ public class ScanFragment extends Fragment {
     private void init() {
         sourceImageView = (ImageView) view.findViewById(R.id.sourceImageView);
         scanButton = (Button) view.findViewById(R.id.scanButton);
-        if(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_NEXT_TEXT) != null){
+        if (getActivity().getIntent().getStringExtra(ScanConstants.SCAN_NEXT_TEXT) != null) {
             scanButton.setText(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_NEXT_TEXT));
         }
         scanButton.setOnClickListener(new ScanButtonClickListener());
@@ -101,7 +101,12 @@ public class ScanFragment extends Fragment {
         Bitmap scaledBitmap = scaledBitmap(original, sourceFrame.getWidth(), sourceFrame.getHeight());
         sourceImageView.setImageBitmap(scaledBitmap);
         Bitmap tempBitmap = ((BitmapDrawable) sourceImageView.getDrawable()).getBitmap();
-        Map<Integer, PointF> pointFs = getEdgePoints(tempBitmap);
+        //Map<Integer, PointF> pointFsTest = getEdgePoints(tempBitmap);
+        Map<Integer, PointF> pointFs = new HashMap<>();//getEdgePoints(tempBitmap);
+        pointFs.put(0, new PointF(0, 0));
+        pointFs.put(1, new PointF(scaledBitmap.getWidth(), 0));
+        pointFs.put(2, new PointF(0, scaledBitmap.getHeight()));
+        pointFs.put(3, new PointF(scaledBitmap.getWidth(), scaledBitmap.getHeight()));
         polygonView.setPoints(pointFs);
         polygonView.setVisibility(View.VISIBLE);
         int padding = (int) getResources().getDimension(R.dimen.scanPadding);
@@ -216,7 +221,7 @@ public class ScanFragment extends Fragment {
 
         @Override
         protected Bitmap doInBackground(Void... params) {
-            Bitmap bitmap =  getScannedBitmap(original, points);
+            Bitmap bitmap = getScannedBitmap(original, points);
             Uri uri = Utils.getUri(getActivity(), bitmap);
             scanner.onScanFinish(uri);
             return bitmap;
