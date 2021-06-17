@@ -1,9 +1,17 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
 
 android {
     compileSdkVersion 30
     buildToolsVersion "29.0.3"
     ndkVersion "21.1.6352462"
+    
+    // Needed for jitpack builds
+    packagingOptions {
+        doNotStrip '*/mips/*.so'
+        doNotStrip '*/mips64/*.so'
+    }
+
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 30
@@ -17,7 +25,7 @@ android {
     sourceSets.main
             {
                 jni.srcDirs = []
-                jniLibs.srcDir 'src/main/libs'
+                jniLibs.srcDirs 'src/main/libs'
             }
     buildTypes {
         release {
@@ -25,6 +33,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    
 }
 
 dependencies {

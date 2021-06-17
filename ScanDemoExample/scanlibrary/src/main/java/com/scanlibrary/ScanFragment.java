@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import java.io.IOException;
@@ -40,9 +39,6 @@ public class ScanFragment extends Fragment {
     private ProgressDialogFragment progressDialogFragment;
     private IScanner scanner;
     private Bitmap original;
-    private ImageButton rotateLeftButton;
-    private ImageButton rotateRightButton;
-    float currentRotation = 0;
 
     @Override
     public void onAttach(Activity activity) {
@@ -64,18 +60,12 @@ public class ScanFragment extends Fragment {
 
     }
 
-    public Bitmap RotateBitmap(Bitmap source, float angle)
-    {
-        Matrix matrix = new Matrix();
-        matrix.postRotate(angle);
-        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
-    }
-
     private void init() {
         sourceImageView = (ImageView) view.findViewById(R.id.sourceImageView);
         scanButton = (Button) view.findViewById(R.id.scanButton);
-        rotateLeftButton = (ImageButton) view.findViewById(R.id.btnRLeft);
-        rotateRightButton = (ImageButton) view.findViewById(R.id.btnRRight);
+        if(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_NEXT_TEXT) != null){
+            scanButton.setText(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_NEXT_TEXT));
+        }
         scanButton.setOnClickListener(new ScanButtonClickListener());
         sourceFrame = (FrameLayout) view.findViewById(R.id.sourceFrame);
         polygonView = (PolygonView) view.findViewById(R.id.polygonView);
@@ -88,46 +78,13 @@ public class ScanFragment extends Fragment {
                 }
             }
         });
-        rotateLeftButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                rotateImage(true);
-            }
-        });
-        rotateRightButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                rotateImage(false);
-            }
-        });
-    }
-
-    private void rotateImage(boolean left){
-        if(currentRotation == 360){
-            currentRotation = -90;
-        }
-        if(left){
-            rLeft();
-        }else{
-            rRight();
-        }
-        original = RotateBitmap(original,currentRotation);
-        setBitmap(original);
-    }
-
-    private void rLeft(){
-        currentRotation+=90;
-    }
-
-    private void rRight(){
-        currentRotation-=90;
     }
 
     private Bitmap getBitmap() {
         Uri uri = getUri();
         try {
             Bitmap bitmap = Utils.getBitmap(getActivity(), uri);
-            //getActivity().getContentResolver().delete(uri, null, null);
+            getActivity().getContentResolver().delete(uri, null, null);
             return bitmap;
         } catch (IOException e) {
             e.printStackTrace();

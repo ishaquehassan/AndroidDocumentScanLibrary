@@ -18,10 +18,11 @@
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:drawableTop="@drawable/ic_image"
-            android:text="Original"
+            android:text="@string/label_org"
             android:textColor="@android:color/white" />
 
         <Button
+            android:visibility="gone"
             android:id="@+id/magicColor"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -29,10 +30,11 @@
             android:background="@android:color/transparent"
             android:drawableTop="@drawable/ic_enhamce_image"
             android:singleLine="true"
-            android:text="Color"
+            android:text="@string/label_magic"
             android:textColor="@android:color/white" />
 
         <Button
+            android:visibility="gone"
             android:id="@+id/grayMode"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -40,7 +42,7 @@
             android:background="@android:color/transparent"
             android:drawableTop="@drawable/ic_gray"
             android:singleLine="true"
-            android:text="Gray"
+            android:text="@string/label_gray"
             android:textColor="@android:color/white" />
 
         <Button
@@ -51,20 +53,42 @@
             android:background="@android:color/transparent"
             android:drawableTop="@drawable/ic_black_and_white"
             android:singleLine="true"
-            android:text="B/W"
+            android:text="@string/label_b_amp_w"
             android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/rotanticButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/ic_rotac"
+            android:singleLine="true"
+            android:text="@string/rotate_left"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/rotcButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/ic_rotc"
+            android:singleLine="true"
+            android:text="@string/rotate_right"
+            android:textColor="@android:color/white" />
+
     </LinearLayout>
 
     <Button
-        android:layout_alignParentBottom="true"
         android:id="@+id/doneButton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:background="@color/bottom_background_color"
         android:orientation="horizontal"
         android:padding="@dimen/bottom_bar_padding"
         android:text="@string/done" />
-
 
 
     <FrameLayout

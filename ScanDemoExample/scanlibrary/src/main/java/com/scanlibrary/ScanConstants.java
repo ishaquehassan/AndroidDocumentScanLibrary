@@ -16,6 +16,13 @@ public class ScanConstants {
     public final static String SCANNED_RESULT = "scannedResult";
     public final static String IMAGE_PATH = Environment
             .getExternalStorageDirectory().getPath() + "/scanSample";
-
     public final static String SELECTED_BITMAP = "selectedBitmap";
+
+    // For passing dynamic labels
+    public final static String SCAN_NEXT_TEXT = "scanNextText";
+    public final static String SCAN_SAVE_TEXT = "scanSaveText";
+    public final static String SCAN_ROTATE_LEFT_TEXT = "scanRotateLeftText";
+    public final static String SCAN_ROTATE_RIGHT_TEXT = "scanRotateRightText";
+    public final static String SCAN_BNW_TEXT = "scanBNWText";
+    public final static String SCAN_ORG_TEXT = "scanORGText";
 }

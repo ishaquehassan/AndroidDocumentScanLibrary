@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,7 +33,8 @@ import java.util.Date;
  * Created by jhansi on 04/04/15.
  */
 public class PickImageFragment extends Fragment {
-
+    int camorgal = 0;
+    private String imagePath = "";
     private View view;
     private ImageButton cameraButton;
     private ImageButton galleryButton;
@@ -61,19 +63,22 @@ public class PickImageFragment extends Fragment {
         cameraButton.setOnClickListener(new CameraButtonClickListener());
         galleryButton = (ImageButton) view.findViewById(R.id.selectButton);
         galleryButton.setOnClickListener(new GalleryClickListener());
+        imagePath = getActivity().getApplicationContext().getExternalCacheDir().getPath() + "/scanSample";
         if (isIntentPreferenceSet()) {
             handleIntentPreference();
+        } else {
+            getActivity().finish();
         }
     }
 
     private void clearTempImages() {
-       /* try {
-            File tempFolder = new File(ScanConstants.IMAGE_PATH);
+        try {
+            File tempFolder = new File(imagePath);
             for (File f : tempFolder.listFiles())
                 f.delete();
         } catch (Exception e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
     private void handleIntentPreference() {
@@ -111,6 +116,7 @@ public class PickImageFragment extends Fragment {
     }
 
     public void openMediaContent() {
+        camorgal = 1;
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("image/*");
@@ -118,15 +124,16 @@ public class PickImageFragment extends Fragment {
     }
 
     public void openCamera() {
-
+        camorgal = 0;
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
             File file = createImageFile();
             boolean isDirectoryCreated = file.getParentFile().mkdirs();
             Log.d("", "openCamera: isDirectoryCreated: " + isDirectoryCreated);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            String aut =   getActivity().getApplicationContext().getPackageName() + ".com.scanlibrary.provider"; // As defined in Manifest
                 Uri tempFileUri = FileProvider.getUriForFile(getActivity().getApplicationContext(),
-                        BuildConfig.LIBRARY_PACKAGE_NAME+ ".filProvider", // As defined in Manifest
+                        aut, // As defined in Manifest
                         file);
                 cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, tempFileUri);
             } else {
@@ -143,7 +150,7 @@ public class PickImageFragment extends Fragment {
         clearTempImages();
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new
                 Date());
-        File file = new File(ScanConstants.IMAGE_PATH, "IMG_" + timeStamp +
+        File file = new File(imagePath, "IMG_" + timeStamp +
                 ".jpg");
         fileUri = Uri.fromFile(file);
         return file;
@@ -152,16 +159,16 @@ public class PickImageFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.d("", "onActivityResult" + resultCode);
-        Uri bitmap = null;
+        Bitmap bitmap = null;
         if (resultCode == Activity.RESULT_OK) {
             try {
                 switch (requestCode) {
                     case ScanConstants.START_CAMERA_REQUEST_CODE:
-                        bitmap = fileUri;
+                        bitmap = getBitmap(fileUri);
                         break;
 
                     case ScanConstants.PICKFILE_REQUEST_CODE:
-                        bitmap = data.getData();
+                        bitmap = getBitmap(data.getData());
                         break;
                 }
             } catch (Exception e) {
@@ -171,19 +178,63 @@ public class PickImageFragment extends Fragment {
             getActivity().finish();
         }
         if (bitmap != null) {
+            
+            if ( camorgal == 0 )
+            {
+            //PickImageFragment.this.getActivity().getContentResolver().notifyChange(fileUri, null);
+            File imageFile = new File(fileUri.getPath());
+            ExifInterface exif = null;
+            
+            try
+            {
+                exif = new ExifInterface(imageFile.getAbsolutePath());
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+            
+            int orientation = 0;
+            if (exif != null)
+            {
+                orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+            }
+            
+            int rotate = 0;
+            switch (orientation) {
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    rotate = 270;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    rotate = 180;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    rotate = 90;
+                    break;
+            }
+
+            android.graphics.Matrix matrix = new android.graphics.Matrix();
+            matrix.postRotate(rotate);
+            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+            }
             postImagePick(bitmap);
         }
     }
 
-    protected void postImagePick(Uri uri) {
-        //Uri uri = Utils.getUri(getActivity(), bitmap);
-        //bitmap.recycle();
+    protected void postImagePick(Bitmap bitmap) {
+        Uri uri = Utils.getUri(getActivity(), bitmap);
+        bitmap.recycle();
         scanner.onBitmapSelect(uri);
     }
 
     private Bitmap getBitmap(Uri selectedimg) throws IOException {
         BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inSampleSize = 3;
+        try {
+            int quality = getArguments().getInt("quality", 1);
+            options.inSampleSize = quality;
+        } catch (Exception e) {
+            options.inSampleSize = 1;
+        }
         AssetFileDescriptor fileDescriptor = null;
         fileDescriptor =
                 getActivity().getContentResolver().openAssetFileDescriptor(selectedimg, "r");

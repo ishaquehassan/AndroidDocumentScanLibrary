@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">ScanLibrary</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="scanning">Scanning</string>
     <string name="done">Save</string>
@@ -13,4 +11,10 @@
     <string name="applying_filter">Applying filter</string>
     <string name="low_memory">Low Memory</string>
     <string name="low_memory_message">Your phone is low on memory, you may feel some lags while editing images.</string>
+    <string name="rotate_right">Right</string>
+    <string name="rotate_left">Left</string>
+    <string name="label_gray">Gray</string>
+    <string name="label_magic">Magic</string>
+    <string name="label_b_amp_w"><![CDATA[B & W]]></string>
+    <string name="label_org">Org</string>
 </resources>
