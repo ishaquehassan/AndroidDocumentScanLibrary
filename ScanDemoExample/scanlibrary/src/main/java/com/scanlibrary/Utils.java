@@ -31,7 +31,6 @@ public class Utils {
     }
 
     public static Bitmap getBitmap(Context context, Uri uri) throws IOException {
-        Bitmap bitmap = MediaStore.Images.Media.getBitmap(context.getContentResolver(), uri);
-        return bitmap;
+        return MediaStore.Images.Media.getBitmap(context.getContentResolver(), uri);
     }
 }

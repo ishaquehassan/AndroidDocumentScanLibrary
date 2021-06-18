@@ -13,7 +13,6 @@
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="true"
-        android:label="@string/app_name"
         android:largeHeap="true">
         <activity android:name=".ScanActivity"
             android:configChanges="orientation|screenSize"
@@ -22,7 +21,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.com.scanlibrary.provider"
+            android:authorities="com.scanlibrary.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
