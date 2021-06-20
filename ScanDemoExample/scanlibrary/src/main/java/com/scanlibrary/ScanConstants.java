@@ -25,4 +25,7 @@ public class ScanConstants {
     public final static String SCAN_ROTATE_RIGHT_TEXT = "scanRotateRightText";
     public final static String SCAN_BNW_TEXT = "scanBNWText";
     public final static String SCAN_ORG_TEXT = "scanORGText";
+    public final static String SCAN_SCANNING_MESSAGE = "scanScanningMessage";
+    public final static String SCAN_LOADING_MESSAGE = "scanLoadingMessage";
+    public final static String SCAN_APPLYING_FILTER = "scanApplyingFilter";
 }

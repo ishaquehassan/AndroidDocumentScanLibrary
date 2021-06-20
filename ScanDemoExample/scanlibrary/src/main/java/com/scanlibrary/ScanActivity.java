@@ -33,6 +33,9 @@ public class ScanActivity extends Activity implements IScanner, ComponentCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scan_layout);
+        if(getActionBar() != null){
+            getActionBar().hide();
+        }
         checkPermissions();
     }
 
@@ -137,11 +140,11 @@ public class ScanActivity extends Activity implements IScanner, ComponentCallbac
                    If the event is TRIM_MEMORY_COMPLETE, the process will be one of
                    the first to be terminated.
                 */
-                new AlertDialog.Builder(this)
-                        .setTitle(R.string.low_memory)
-                        .setMessage(R.string.low_memory_message)
-                        .create()
-                        .show();
+//                new AlertDialog.Builder(this)
+//                        .setTitle(R.string.low_memory)
+//                        .setMessage(R.string.low_memory_message)
+//                        .create()
+//                        .show();
                 break;
             default:
                 /*

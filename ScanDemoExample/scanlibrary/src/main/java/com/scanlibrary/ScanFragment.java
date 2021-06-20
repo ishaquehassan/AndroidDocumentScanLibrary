@@ -216,7 +216,11 @@ public class ScanFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            showProgressDialog(getString(R.string.scanning));
+            if(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_SCANNING_MESSAGE) != null){
+                showProgressDialog(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_SCANNING_MESSAGE));
+            }else{
+                showProgressDialog(getResources().getString(R.string.scanning));
+            }
         }
 
         @Override

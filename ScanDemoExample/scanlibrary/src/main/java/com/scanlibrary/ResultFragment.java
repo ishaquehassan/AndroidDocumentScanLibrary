@@ -109,7 +109,11 @@ public class ResultFragment extends Fragment {
     private class DoneButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            showProgressDialog(getResources().getString(R.string.loading));
+            if(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_LOADING_MESSAGE) != null){
+                showProgressDialog(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_LOADING_MESSAGE));
+            }else{
+                showProgressDialog(getResources().getString(R.string.loading));
+            }
             AsyncTask.execute(new Runnable() {
                 @Override
                 public void run() {
@@ -142,7 +146,11 @@ public class ResultFragment extends Fragment {
     private class BWButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(final View v) {
-            showProgressDialog(getResources().getString(R.string.applying_filter));
+            if(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER) != null){
+                showProgressDialog(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER));
+            }else{
+                showProgressDialog(getResources().getString(R.string.applying_filter));
+            }
             AsyncTask.execute(new Runnable() {
                 @Override
                 public void run() {
@@ -175,7 +183,11 @@ public class ResultFragment extends Fragment {
     private class MagicColorButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(final View v) {
-            showProgressDialog(getResources().getString(R.string.applying_filter));
+            if(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER) != null){
+                showProgressDialog(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER));
+            }else{
+                showProgressDialog(getResources().getString(R.string.applying_filter));
+            }
             AsyncTask.execute(new Runnable() {
                 @Override
                 public void run() {
@@ -209,7 +221,11 @@ public class ResultFragment extends Fragment {
         @Override
         public void onClick(View v) {
             try {
-                showProgressDialog(getResources().getString(R.string.applying_filter));
+                if(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER) != null){
+                    showProgressDialog(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER));
+                }else{
+                    showProgressDialog(getResources().getString(R.string.applying_filter));
+                }
                 transformed = rotoriginal;
                 scannedImageView.setImageBitmap(rotoriginal);
                 dismissDialog();
@@ -223,7 +239,11 @@ public class ResultFragment extends Fragment {
     private class GrayButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(final View v) {
-            showProgressDialog(getResources().getString(R.string.applying_filter));
+            if(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER) != null){
+                showProgressDialog(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER));
+            }else{
+                showProgressDialog(getResources().getString(R.string.applying_filter));
+            }
             AsyncTask.execute(new Runnable() {
                 @Override
                 public void run() {
@@ -256,7 +276,11 @@ public class ResultFragment extends Fragment {
     private class RotanticlockButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(final View v) {
-            showProgressDialog(getResources().getString(R.string.applying_filter));
+            if(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER) != null){
+                showProgressDialog(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER));
+            }else{
+                showProgressDialog(getResources().getString(R.string.applying_filter));
+            }
             AsyncTask.execute(new Runnable() {
                 @Override
                 public void run() {
@@ -301,7 +325,11 @@ public class ResultFragment extends Fragment {
     private class RotclockButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(final View v) {
-            showProgressDialog(getResources().getString(R.string.applying_filter));
+            if(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER) != null){
+                showProgressDialog(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER));
+            }else{
+                showProgressDialog(getResources().getString(R.string.applying_filter));
+            }
             AsyncTask.execute(new Runnable() {
                 @Override
                 public void run() {
