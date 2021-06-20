@@ -27,5 +27,8 @@ public class ScanConstants {
     public final static String SCAN_ORG_TEXT = "scanORGText";
     public final static String SCAN_SCANNING_MESSAGE = "scanScanningMessage";
     public final static String SCAN_LOADING_MESSAGE = "scanLoadingMessage";
-    public final static String SCAN_APPLYING_FILTER = "scanApplyingFilter";
+    public final static String SCAN_APPLYING_FILTER_MESSAGE = "scanApplyingFilterMessage";
+    public final static String SCAN_CANT_CROP_ERROR_MESSAGE = "scanCantCropMessage";
+    public final static String SCAN_CANT_CROP_ERROR_TITLE = "scanCantCropFilterTitle";
+    public final static String SCAN_OK_LABEL = "scanOkLabel";
 }

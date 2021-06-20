@@ -171,7 +171,19 @@ public class ScanFragment extends Fragment {
     }
 
     private void showErrorDialog() {
-        SingleButtonDialogFragment fragment = new SingleButtonDialogFragment(R.string.ok, getString(R.string.cantCrop), "Error", true);
+        String title = "Error";
+        String message = getString(R.string.cantCrop);
+        String ok = getString(R.string.ok);
+        if(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_CANT_CROP_ERROR_TITLE) != null){
+            title = getActivity().getIntent().getStringExtra(ScanConstants.SCAN_CANT_CROP_ERROR_TITLE);
+        }
+        if(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_CANT_CROP_ERROR_MESSAGE) != null){
+            message = getActivity().getIntent().getStringExtra(ScanConstants.SCAN_CANT_CROP_ERROR_MESSAGE);
+        }
+        if(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_OK_LABEL) != null){
+            ok = getActivity().getIntent().getStringExtra(ScanConstants.SCAN_OK_LABEL);
+        }
+        SingleButtonDialogFragment fragment = new SingleButtonDialogFragment(ok, message, title, true);
         FragmentManager fm = getActivity().getFragmentManager();
         fragment.show(fm, SingleButtonDialogFragment.class.toString());
     }

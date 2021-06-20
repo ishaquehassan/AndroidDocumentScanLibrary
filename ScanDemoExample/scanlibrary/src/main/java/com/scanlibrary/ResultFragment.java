@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -146,8 +145,8 @@ public class ResultFragment extends Fragment {
     private class BWButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(final View v) {
-            if(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER) != null){
-                showProgressDialog(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER));
+            if(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER_MESSAGE) != null){
+                showProgressDialog(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER_MESSAGE));
             }else{
                 showProgressDialog(getResources().getString(R.string.applying_filter));
             }
@@ -183,8 +182,8 @@ public class ResultFragment extends Fragment {
     private class MagicColorButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(final View v) {
-            if(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER) != null){
-                showProgressDialog(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER));
+            if(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER_MESSAGE) != null){
+                showProgressDialog(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER_MESSAGE));
             }else{
                 showProgressDialog(getResources().getString(R.string.applying_filter));
             }
@@ -221,8 +220,8 @@ public class ResultFragment extends Fragment {
         @Override
         public void onClick(View v) {
             try {
-                if(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER) != null){
-                    showProgressDialog(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER));
+                if(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER_MESSAGE) != null){
+                    showProgressDialog(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER_MESSAGE));
                 }else{
                     showProgressDialog(getResources().getString(R.string.applying_filter));
                 }
@@ -239,8 +238,8 @@ public class ResultFragment extends Fragment {
     private class GrayButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(final View v) {
-            if(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER) != null){
-                showProgressDialog(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER));
+            if(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER_MESSAGE) != null){
+                showProgressDialog(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER_MESSAGE));
             }else{
                 showProgressDialog(getResources().getString(R.string.applying_filter));
             }
@@ -276,8 +275,8 @@ public class ResultFragment extends Fragment {
     private class RotanticlockButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(final View v) {
-            if(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER) != null){
-                showProgressDialog(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER));
+            if(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER_MESSAGE) != null){
+                showProgressDialog(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER_MESSAGE));
             }else{
                 showProgressDialog(getResources().getString(R.string.applying_filter));
             }
@@ -325,8 +324,8 @@ public class ResultFragment extends Fragment {
     private class RotclockButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(final View v) {
-            if(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER) != null){
-                showProgressDialog(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER));
+            if(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER_MESSAGE) != null){
+                showProgressDialog(getActivity().getIntent().getStringExtra(ScanConstants.SCAN_APPLYING_FILTER_MESSAGE));
             }else{
                 showProgressDialog(getResources().getString(R.string.applying_filter));
             }
