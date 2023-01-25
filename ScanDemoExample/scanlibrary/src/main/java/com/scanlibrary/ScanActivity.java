@@ -32,7 +32,7 @@ public class ScanActivity extends Activity implements IScanner, ComponentCallbac
 //        } else {
 //            permissions[0] = Manifest.permission.READ_EXTERNAL_STORAGE;
 //        }
-        permissions[1] = Manifest.permission.CAMERA;
+        permissions[1] = Manifest.permission.READ_MEDIA_IMAGES;
 
         setContentView(R.layout.scan_layout);
         if(getActionBar() != null){
