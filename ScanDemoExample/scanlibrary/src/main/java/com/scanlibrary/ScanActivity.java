@@ -27,12 +27,12 @@ public class ScanActivity extends Activity implements IScanner, ComponentCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        if (Build.VERSION.SDK_INT >= 33) {
+        if (Build.VERSION.SDK_INT >= 33) {
             permissions[0] = Manifest.permission.READ_MEDIA_IMAGES;
-//        } else {
-//            permissions[0] = Manifest.permission.READ_EXTERNAL_STORAGE;
-//        }
-        permissions[1] = Manifest.permission.READ_MEDIA_IMAGES;
+        } else {
+            permissions[0] = Manifest.permission.READ_EXTERNAL_STORAGE;
+        }
+        permissions[1] = Manifest.permission.CAMERA;
 
         setContentView(R.layout.scan_layout);
         if(getActionBar() != null){
