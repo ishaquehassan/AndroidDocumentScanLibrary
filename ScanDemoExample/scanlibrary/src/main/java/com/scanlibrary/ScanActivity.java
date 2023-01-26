@@ -30,7 +30,7 @@ public class ScanActivity extends Activity implements IScanner, ComponentCallbac
         if (Build.VERSION.SDK_INT >= 33) {
             permissions[0] = Manifest.permission.READ_MEDIA_IMAGES;
         } else {
-            permissions[0] = Manifest.permission.READ_EXTERNAL_STORAGE;
+            permissions[0] = Manifest.permission.READ_MEDIA_IMAGES;
         }
         permissions[1] = Manifest.permission.CAMERA;
 
