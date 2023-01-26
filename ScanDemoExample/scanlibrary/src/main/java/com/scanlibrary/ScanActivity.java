@@ -2,14 +2,13 @@ package com.scanlibrary;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.ComponentCallbacks2;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -22,16 +21,19 @@ import java.util.List;
  */
 public class ScanActivity extends Activity implements IScanner, ComponentCallbacks2 {
 
-    final String[] permissions = new String[]{
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.CAMERA,
-    };
-
+    String[] permissions = new String[2];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (Build.VERSION.SDK_INT >= 33) {
+            permissions[0] = Manifest.permission.READ_MEDIA_IMAGES;
+        } else {
+            permissions[0] = Manifest.permission.READ_EXTERNAL_STORAGE;
+        }
+        permissions[1] = Manifest.permission.CAMERA;
+
         setContentView(R.layout.scan_layout);
         if(getActionBar() != null){
             getActionBar().hide();
@@ -39,7 +41,7 @@ public class ScanActivity extends Activity implements IScanner, ComponentCallbac
         checkPermissions();
     }
 
-    private boolean checkPermissions() {
+    private void checkPermissions() {
         List<String> listPermissionsNeeded = new ArrayList<>();
         for (String p : permissions) {
             int result = ContextCompat.checkSelfPermission(this, p);
@@ -49,14 +51,13 @@ public class ScanActivity extends Activity implements IScanner, ComponentCallbac
         }
         if (!listPermissionsNeeded.isEmpty()) {
             ActivityCompat.requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), 100);
-            return false;
+            return;
         }
         init();
-        return true;
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (requestCode == 100) {
             if (grantResults.length > 0
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
